@@ -9,6 +9,9 @@ import { clerkMiddleware } from "@clerk/express";
 import { clerkWebhookHandler } from "./webhooks/clerk";
 import { getEnv } from "./lib/env";
 import keepAliveCron from "./lib/cron";
+import meRouter from "./routes/meRoutes";
+import productRouter from "./routes/productRoutes";
+import streamRouter from "./routes/streamRoutes";
 
 const env = getEnv();
 const app = express();
@@ -26,6 +29,10 @@ app.use(clerkMiddleware());
 app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
+
+app.use("/api/me", meRouter);
+app.use("/api/products", productRouter);
+app.use("/api/stream", streamRouter);
 
 const publicDir = path.join(process.cwd(), "public");
 if (fs.existsSync(publicDir)) {
@@ -45,6 +52,8 @@ if (fs.existsSync(publicDir)) {
     res.sendFile(path.join(publicDir, "index.html"), (err) => next(err));
   });
 }
+
+// todo
 
 app.listen(env.PORT, () => {
   console.log("listen on port:", env.PORT)
