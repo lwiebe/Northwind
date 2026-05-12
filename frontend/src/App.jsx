@@ -14,9 +14,6 @@ function App() {
           <SignInButton mode="modal" />
           <SignUpButton mode="modal" />
         </Show>
-        <Show when="signed-in">
-          <UserButton />
-        </Show>
       </header>
     </Layout>
   )
