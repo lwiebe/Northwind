@@ -12,6 +12,7 @@ import OrderChatPage from './pages/OrderChatPage'
 import OrderSummaryPage from './pages/OrderSummaryPage'
 import OrderDetailsPage from './pages/OrderDetailsPage'
 import OrderVideoPage from './pages/OrderVideoPage'
+import AdminProductPage from './pages/AdminProductPage'
 
 function App() {
   const { isLoaded, isSignedIn } = useAuth()
@@ -28,6 +29,7 @@ function App() {
         <Route path='/product/:slug' element={<ProductDetailPage />} />
         <Route path='/demo-sentry' element={<SentryDemoPage />} />
         <Route path='/orders/:id/call' element={isSignedIn ? <OrderVideoPage /> : <Navigate to={"/"} replace />} />
+        <Route path='/admin' element={isSignedIn ? <AdminProductPage/> : <Navigate to={"/"} replace />}/>
 
         {/* NESTED ROUTES */}
         <Route path='/orders/:id' element={<OrderDetailsPage />}>
